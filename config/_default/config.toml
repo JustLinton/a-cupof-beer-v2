@@ -6,8 +6,8 @@ baseURL = "http://test.cupof.beer/"
 languageCode = "en"
 defaultContentLanguage = "en"
 
-title = "Congo"
-# copyright = "Copy, _right?_ :thinking_face:"
+title = "Just Linton`s Hub"
+copyright = "Copy, _right?_ :thinking_face:"
 
 enableEmoji = true
 enableRobotsTXT = true
@@ -15,11 +15,13 @@ enableRobotsTXT = true
 summaryLength = 0
 
 [author]
-  # name = "Your name here"
-  # image = "img/author.jpg"
-  # bio = "A little bit about you"
-  # links = [
-  #   { email = "mailto:hello@your_domain.com" },
+  name = "Linton Jiang"
+  image = "img/author.jpg"
+#  image = "https://imgtu.com/i/7e536g"
+  
+  bio = "God Helps Those Who Help Themselves."
+  links = [
+    { email = "mailto:2705111998@qq.com" },
   #   { link = "https://link-to-some-website.com/" },
   #   { amazon = "https://www.amazon.com/hz/wishlist/ls/wishlist-id" },
   #   { apple = "https://www.apple.com" },
@@ -31,7 +33,7 @@ summaryLength = 0
   #   { facebook = "https://facebook.com/username" },
   #   { flickr = "https://www.flickr.com/photos/username/" },
   #   { foursquare = "https://foursquare.com/username" },
-  #   { github = "https://github.com/username" },
+    { github = "https://github.com/JustLinton" },
   #   { gitlab = "https://gitlab.com/username" },
   #   { google = "https://www.google.com/" },
   #   { instagram = "https://instagram.com/username" },
@@ -53,7 +55,7 @@ summaryLength = 0
   #   { tiktok = "https://tiktok.com/@username" },
   #   { tumblr = "https://username.tumblr.com" },
   #   { twitch = "https://twitch.tv/username" },
-  #   { twitter = "https://twitter.com/username" },
+    { twitter = "https://twitter.com/linton_collin" },
   #   { whatsapp = "https://wa.me/phone-number" },
-  #   { youtube = "https://youtube.com/username" },
-  # ]
+    { youtube = "https://space.bilibili.com/29191579" },
+  ]
