@@ -1,5 +1,8 @@
 ---
 title: 'About'
+showDate: false
+showReadingTime: false
+showWordCount: false
 ---
 
 ## Contra vagos

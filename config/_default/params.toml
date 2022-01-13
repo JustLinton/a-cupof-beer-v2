@@ -5,11 +5,11 @@
 # Refer to the theme docs for more details about each of these parameters.
 # https://jpanther.github.io/congo/docs/configuration/#theme-parameters
 
-# colorScheme = "ocean"
-colorScheme = "congo"
+colorScheme = "ocean"
+# colorScheme = "congo"
 # darkMode = "auto"
 # darkToggle = false
-logo = "logo3.png"
+logo = "logo6.jpg"
 # description = "My awesome website"
 # mainSections = ["section1", "section2"]
 # robots = ""

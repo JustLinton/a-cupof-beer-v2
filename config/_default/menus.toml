@@ -21,21 +21,37 @@
 #   weight = 20
 
 [[main]]
-  name = "Projects"
-  url = "http://114.215.149.199/"
-  weight = 20
-
-[[main]]
   name = "Tags"
   pageRef = "tags"
+  weight = 20
+  
+[[main]]
+  name = "Projects"
+  url = "http://114.215.149.199/"
   weight = 30
 
+[[main]]
+  name = "Publications"
+  pageRef = "pages/publications"
+  weight = 40  
 
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.
 
+
+  
 [[footer]]
-  name = "Tags"
-  pageRef = "tags"
+  name = "IRLab@SDU"
+  url = "https://ir.sdu.edu.cn/"
   weight = 10
+  
+[[footer]]
+  name = "Shandong University"
+  url = "https://www.sdu.edu.cn/"
+  weight = 20
+
+[[footer]]
+  name = "Nesto"
+  url = "http://nesto.cupof.beer/"
+  weight = 30
