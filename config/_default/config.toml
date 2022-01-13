@@ -2,11 +2,12 @@
 # Refer to the theme docs for more details about each of these parameters.
 # https://jpanther.github.io/congo/docs/getting-started/
 
-baseURL = "http://test.cupof.beer/"
+# baseURL = "http://test.cupof.beer/"
+baseURL = "http://a.cupof.beer/"
 languageCode = "en"
 defaultContentLanguage = "en"
 
-title = "Just Linton`s Hub"
+title = "A cup of beer"
 copyright = "Copy, _right?_ :thinking_face:"
 
 enableEmoji = true
@@ -16,7 +17,7 @@ summaryLength = 0
 
 [author]
   name = "Linton Jiang"
-  image = "img/author.jpg"
+    image = "img/author.jpg"
 #  image = "https://imgtu.com/i/7e536g"
   
   bio = "God Helps Those Who Help Themselves."

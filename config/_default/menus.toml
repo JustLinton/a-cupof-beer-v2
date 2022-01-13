@@ -15,9 +15,14 @@
   pageRef = "posts"
   weight = 10
 
+# [[main]]
+#   name = "Categories"
+#   pageRef = "categories"
+#   weight = 20
+
 [[main]]
-  name = "Categories"
-  pageRef = "categories"
+  name = "Projects"
+  url = "http://114.215.149.199/"
   weight = 20
 
 [[main]]

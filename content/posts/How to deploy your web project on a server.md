@@ -2,6 +2,7 @@
 title: 如何部署一个Web应用到云服务器
 date: 2022-01-03
 description: 'Once again he glanced at his rival in the opposite cubicle. Something seemed to tell him with certainty that Tillotson was busy on the same job as himself. There was no way of knowing whose version would finally be adopted, but he felt a profound conviction that it would be his own'
+summary: 做DB课设的时候，花哨了一手。感觉实践能力得到了进一步提升~ 这里是学习的过程中记录的知识！
 
 ---
 
