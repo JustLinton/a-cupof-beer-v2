@@ -9,13 +9,14 @@ colorScheme = "ocean"
 # colorScheme = "congo"
 # darkMode = "auto"
 # darkToggle = false
-logo = "logo6.jpg"
+logo = "logo7.jpg"
 # description = "My awesome website"
 # mainSections = ["section1", "section2"]
 # robots = ""
 
 [homepage]
   layout = "profile" # valid options: page, profile, custom
+#   layout = "custom"
   showRecent = false
 
 [article]

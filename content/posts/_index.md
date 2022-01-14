@@ -8,7 +8,7 @@ With the strength of conviction, you can move others by your own efforts.
 And do not make success or failure the criteria by which you live.
 The chances are you`ll be a person worthy of your own respect.
 
-Here are the posts. Grouped by the year they were published.
+Here are the posts. Grouped by the year they were published.:star_struck:
 
 {{< /lead >}}
 

@@ -5,7 +5,7 @@ menu:
 ---
 
 {{< lead >}}
-Yoo, take a look at what we have written down.
+Yoo, take a look at what we have written down.:hugs:
 
 {{< /lead >}}
 

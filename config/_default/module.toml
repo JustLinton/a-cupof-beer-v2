@@ -1,5 +1,0 @@
-[module]
-proxy = 'https://127.0.0.1:7890'
-
-[[imports]]
-path = "github.com/jpanther/congo"

@@ -1,0 +1,6 @@
+# [module]
+# noProxy = 'none'
+# proxy = 'https://goproxy.io'
+
+[[imports]]
+path = "github.com/jpanther/congo"
