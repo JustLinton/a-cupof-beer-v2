@@ -1,2 +1,2 @@
 #!/bin/bash
-sh /home/linton/important/hugoSite/hub/lintonScripts/deploy.sh
+sh /Users/jiangjm/myhome/important/sites/a-cupof-beer/lintonScripts/deploy.sh
