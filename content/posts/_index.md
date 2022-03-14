@@ -12,6 +12,10 @@ Here are the posts. Grouped by the year they were published.:star_struck:
 
 {{< /lead >}}
 
+{{< button href="/posts/cp-task/" target="_self" >}}
+查看云计算作业🎉
+{{< /button >}}
+
 ![](https://s4.ax1x.com/2022/01/13/7lcNYq.jpg)
 
 {{< alert >}}
