@@ -387,3 +387,178 @@ E -> id{
 
 ## 控制流语句的翻译
 
+### 控制流语句
+
+控制流语句主要包括if-else语句、复合语句和while语句。
+
+```fortran
+S -> if E then S
+S -> if E then S else S
+S -> while E do S
+S -> begin L end
+S -> A
+L -> L;S
+L -> S
+```
+
+其中S是Statement（语句），L是语句表（即所有的语句），A是赋值语句Assignment，E是布尔表达式Expression
+
+### if-then-else的改良文法
+
+首先看if-else的语义。
+
+if语句中的布尔表达式的真出口是then后的代码；假出口是else后的代码。在真代码最后要自动生成`j`四元式，从而自动跳过假代码。
+
+<img src="https://linton-pics.oss-cn-beijing.aliyuncs.com/uPic/image-20220618105224636.png" alt="image-20220618105224636" style="zoom:33%;" />
+
+### 
+
+为了实现这一语义，我们来设计其改良文法。 
+
+```fortran
+S -> if E then M S1
+S -> if E then M1 S1 N else M2 S2
+M -> ε{记录nextquad}
+N -> ε{生成j指令}
+```
+
+效仿前述的翻译模式设计方法，把M、N要做的动作提出来并增加其ε产生式。
+
+这里M负责记录nextquad，因为S1肯定是真出口，S2肯定是假出口，当碰到他们即可对E进行回填。
+
+### Nextlist
+
+首先，E.truelist是要跳转到布尔表达式E的真出口的四元式构成的链表，我们仿照进行定义S.nextlist是要跳转到**任意语句S（不一定是布尔表达式）的后续语句**的四元式构成的链表。
+
+注意，**“后续语句”不等同于“后继语句”。** 后续语句是逻辑上的概念，后继语句是物理上的概念。前者是在逻辑上，下一条将要执行的四元式，后者是在物理存储的位置关系上，下一条紧接着存储的四元式。我们的nextlist记录的是前者。
+
+举例：在上述N.nextlist是要跳转到N的逻辑上的下条四元式的那些四元式。
+
+### if-then-else的改良文法（cont.）
+
+这里N负责生成语义中间那一条`goto S.next`无条件跳转指令。当然也需要回填。为了实现其回填，我们引入nextlist，其作用和前面俩list一样，只是用于记录待回填的四元式。它回填的结果的整个E之后的代码入口。因为对于多个if-then-else结构嵌套的情况，**其中可能不止一个跳转需要指向该**if-then-else语句之后的位置。
+
+值得注意的是，nextlist是任意语句S的属性，S可以包括E。但是truelist仅是布尔表达式E的属性。
+
+```fortran
+M -> ε{
+	M.quad := nextquad;
+}
+
+N -> ε{
+	N.nextlist := makelist(nextquad); !指明了要用N的在逻辑上要执行的下一条四元式的编号来回填
+	gen(j,_,_,0); !等待回填
+}
+```
+
+```fortran
+S -> if E then M S1{
+	backpatch(E.truelist,M.quad);
+	S.nextlist := merge(E.falselist,S1.nextlist);
+}
+```
+
+对于if-then结构，真出口肯定是then。而假出口实际上就是整个语句的后继，所以和nextlist二者合并。
+
+```fortran
+S -> E then M1 S1 N else M2 S2{
+	backpatch(E.truelist,M1.quad);
+	backpatch(E.falselist,M2.quad);
+	S.nextlist := merge(S1.nextlist,N.nextlist,S2.nextlist)
+}
+```
+
+对于if-then-else结构，E的真出口肯定是then，E的假出口肯定是else，所以这俩list都能直接回填。
+
+S1、S2是S的子语句，他们跳出整个S的结构的出口就是S的后继。对于该if-else-then语句，其中的N想要跳出，也是走S的后继，因此三者可以合并。
+
+> 值得注意的是，nextlist也是当S整个翻译完成仍然不能确定的，需要更大的语法单位的语句翻译完成后再回填。例如if-else嵌套结构，内层的想要完全跳出整个嵌套结构，其nextlist肯定和外层的nextlist一样，都要回填为外层if-else语句的后继。即便是这个最外层的nextlist也无法在其本身翻译完成后被确定，因为谁知道是不是最外层。
+
+### while语句的改良文法
+
+按照惯例，先看语义。
+
+<img src="https://linton-pics.oss-cn-beijing.aliyuncs.com/uPic/image-20220618113202638.png" alt="image-20220618113202638" style="zoom: 33%;" />
+
+E的真出口是循环体，E的假出口是循环体后继。循环体的末尾自动生成j指令来跳转到E。
+
+```fortran
+S -> while M1 E do M2 S1
+M -> ε
+```
+
+M仍然用于记录nextquad，这里分别记录布尔表达式E和循环体S1的四元式编号。
+
+```fortran
+S -> while M1 E do M2 S1{
+	backpatch(E.truelist,M2.quad);
+	backpatch(S1.nextlist,M1.quad);
+	S.nextlist := E.falselist;
+}
+```
+
+理解同上文。
+
+### 复合语句的改良文法
+
+复合语句即语句块或几个语句之间用分号隔开，依次执行：
+
+```fortran
+S -> begin L end
+L -> L1; M S | S !S是和 L1; M S并列的，不是和MS
+M -> ε
+```
+
+对于begin-end语句，只需要把需要回填的nextlist交给S即可，因为仅靠begin和end不能确定回填入口。
+
+**对于分号，就是前面L1所有nextlist的回填的时机了**，因为nextlist的语义就是“逻辑上的下一个执行的东西”，分号就提供了这样一种逻辑，L1的后续语句实际上就是S，所以只需要把S的四元式编号回填给L1的nextlist即可。这里用M来记录。
+
+给出翻译模式，即：
+
+```fortran
+S -> begin L end{
+	S.nextlist := L.nextlist; !L的nextlist还不能确定，需要等待更大的语法单位翻译完成
+}
+
+L -> L1; M S{
+	backpatch(L1.nextlist,M.quad); !分号的语义：L1后续执行的语句就是S本身！
+	L.nextlist := S.nextlist; !S的nextlist还不能确定，需要等待更大的语法单位翻译完成
+}
+
+M -> ε{
+	M.quad := nextquad;
+}
+```
+
+### 其他几个不重要语句如何传递nextlist
+
+```fortran
+L -> S{
+	L.nextlist := S.nextlist;
+}
+
+S -> A{
+	S.nextlist := makelist();
+}
+```
+
+值得注意的是`S -> A`的翻译模式：A是赋值语句，它不需要做任何的回填，所以传递给S一个空的nextlist。
+
+## 符号表
+
+### 作用和内容
+
+- 用于登记各标识符信息
+- 在语义分析阶段，用于分析语义的正确性（符号的引用是否正确）；用于分析作用域
+- 在目标代码生成阶段，用于辅助按照符号名进行地址分配，从而方便目标代码的生成
+
+### 结构
+
+符号表以符号名作为**主键**。各行完全都是通过名字来区分的。
+
+在其余列上会存储该符号的相关信息。因为不同类型的符号可以带有不同的信息，例如过程名和变量名肯定是不同的，所以在一些处理中，选择建立多张符号表，例如变量表、常量表、过程表。很多处理中也会建立一张符号表，在“信息”一栏增加其类型的体现。
+
+### 使用
+
+简言之，在两个时机会对符号表进行操作，一个是符号被声明时，一个是符号被引用时。例如`int a = 1;`和`if(a > 1)`。
+
