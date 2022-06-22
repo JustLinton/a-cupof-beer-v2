@@ -30,10 +30,10 @@
 #  url = "http://114.215.149.199/"
 #  weight = 30
 
-[[main]]
-  name = ":dizzy:ACM Hub"
-  pageRef = "acm"
-  weight = 30 
+#[[main]]
+#  name = ":dizzy:ACM Hub"
+#  pageRef = "acm"
+#  weight = 30 
 
 [[main]]
   name = ":newspaper_roll:Publications"
