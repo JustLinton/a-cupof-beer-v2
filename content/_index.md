@@ -10,5 +10,5 @@ menu:
 A student majoring in CS, a classical guitar lover.
 {{< /lead >}}
 
-{{< button href="/publications/" target="_self" >}}🗞️ View Papers{{< /button >}}
+{{< button href="https://app.cupof.beer/" target="_self" >}}🎉 View Projects{{< /button >}}
 
