@@ -9,7 +9,8 @@ colorScheme = "ocean"
 defaultAppearance = "light" # valid options: light or dark
 autoSwitchAppearance = true
 showAppearanceSwitcher = false
-logo = "logo7.jpg"
+logo = "logo7f.png"
+#logo = "logo7.jpg"
 
 enableSearch = true
 enableCodeCopy = true

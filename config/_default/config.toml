@@ -14,7 +14,7 @@ paginate = 10
 theme = "congo"
 
 # baseURL = "http://test.cupof.beer/"
-baseURL = "http://a.cupof.beer/"
+baseURL = "https://a.cupof.beer/"
 languageCode = "en"
 
 title = "A cup of beer"

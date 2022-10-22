@@ -44,7 +44,15 @@
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.
 
+[[footer]]
+  name = "Microsoft Research Asia"
+  url = "https://www.msra.cn/"
+  weight = 6
 
+#[[footer]]
+ # name = "ByteDance"
+ # url = "https://www.bytedance.com/zh/"
+ # weight = 7
   
 [[footer]]
   name = "IRLab@SDU"
